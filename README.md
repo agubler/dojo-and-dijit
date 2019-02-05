@@ -1,41 +1,73 @@
-# dijit-tree
+Dojo and Dijit Example
 
-This project was generated with the [Dojo CLI](https://github.com/dojo/cli) & [Dojo CLI create app command](https://github.com/dojo/cli-create-app).
+dijit widgets can be included in modern Dojo applications using the `@dojo/interop/DijitWrapper`.
 
-## Build
+### Install Dependencies
 
-Run `npm run build` or `dojo build --mode dist` (the `mode` option defaults to `dist`) to create a production build for the project. The built artifacts will be stored in the `output/dist` directory.
+Ensure that `dojo`, `dijit` and `dojo-typings` are installed from npm.
 
-## Development Build
+To expose the typings, add `"./node_modules/dojo-typings/dijit/1.11/modules.d.ts"` to the `include` option in the `tsconfig.json`.
 
-Run `npm run build:dev` or `dojo build --mode dev` to create a development build for the project. The built artifacts will be stored in the `output/dev` directory.
+### Create a dojo loader configuration
 
-## Development server
+Firstly a dojo loader configuration is required to enable the application to load the dojo/dijit and other external dependencies. This is called `loaderConfig.js`.
 
-Run `npm run dev` or `dojo build --mode dev --watch file --serve` to create a development build and start a development server. By default the server runs on port `9999`, navigate to `http://localhost:9999/`.
+```js
+dojoConfig = {
+    baseUrl: "externals/",
+    packages: [
+        { name: 'dojo', location: 'dojo' },
+        { name: 'dijit', location: 'dijit' },
+        { name: 'dgrid', location: 'dgrid' },
+        { name: 'dstore', location: 'dstore' }
+    ],
+    has: {
+        highcontrast: 0
+    },
+    async: true
+};
+```
 
-To change the port of the development server use the `--port` option on the `dojo build` command.
+The baseUrl is set to `externals/` as this is location that the build will output the deps.
 
-To create an in memory development build and start a development server with hot reload, switch the `--watch` option to `memory`.
+### Configure the dependencies required
 
-## Running unit tests
+Once the loader configuration is done, we need to configure the build process to know what output in the build and what to inject into the page. This configuration is done in the `.dojorc` and is explained in detail [here](https://github.com/dojo/cli-build-app#externals-object):
 
-To run units tests in node only use `npm run test` or `dojo test` which uses JIT (just in time) compilation.
+```json
+{
+	"build-app": {
+			"externals": {
+				"dependencies": [
+					{ "from": "loaderConfig.js", "inject": true },
+					{ "from": "node_modules/dojo", "to": "dojo", "name": "dojo", "inject": "dojo.js", "type": "umd" },
+					{ "from": "node_modules/dijit", "to": "dijit", "name": "dijit", "inject": "themes/claro/claro.css", "type": "umd" }
+				]
+		}
+	}
+}
+```
 
-To run the unit tests against built bundles, run `npm run test:unit`.
+This configuration tells the build to copy resources over to the externals output directory, in this case the `loaderConfig.js` and both the `dojo` and `dijit` dependencies. The `inject` configuration tells the build process to include the specified resources to the application's `index.html`.
 
-To be re-run the unit tests without needing to re-build the full application each time, first build the app with `--mode unit` and the `--watch` option, `dojo build --mode unit --watch`. Then run `dojo test --config local` to run the unit tests as needed.
+### Apply the claro theme
 
-The build test artifacts are written to the `output/tests/unit` directory. These tests are located in the `tests/unit` directory.
+Add the `claro` class to the applications `index.html`
 
-## Running functional tests
+### Use the DijitWrapper with dijit widgets
 
-To run the functional tests, run `npm run test:functional`. These tests are located in the `tests/functional` directory.
+In the application import a dijit widget, wrap in the `DijitWrapper` and then use as a Dojo widget.
 
-## Running unit and functional tests together
+```ts
+import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
+import * as _Button from 'dijit/form/Button';
+import DijitWrapper from '@dojo/interop/dijit/DijitWrapper';
 
-To run both unit and functional tests as the same time, run `npm run test:all`.
+const Button = DijitWrapper(_Button, 'button');
 
-## Further help
-
-To get help for these commands and more, run `dojo` on the command line.
+class MyWidget extends WidgetBase {
+	render() {
+		return w(Button, { label: 'my-button-label' });
+	}
+}
+```
