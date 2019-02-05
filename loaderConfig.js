@@ -2,9 +2,7 @@ dojoConfig = {
     baseUrl: "externals/",
     packages: [
         { name: 'dojo', location: 'dojo' },
-        { name: 'dijit', location: 'dijit' },
-        { name: 'dgrid', location: 'dgrid' },
-        { name: 'dstore', location: 'dstore' }
+        { name: 'dijit', location: 'dijit' }
     ],
     has: {
         highcontrast: 0

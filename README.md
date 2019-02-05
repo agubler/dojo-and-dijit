@@ -14,17 +14,15 @@ Firstly a dojo loader configuration is required to enable the application to loa
 
 ```js
 dojoConfig = {
-    baseUrl: "externals/",
-    packages: [
-        { name: 'dojo', location: 'dojo' },
-        { name: 'dijit', location: 'dijit' },
-        { name: 'dgrid', location: 'dgrid' },
-        { name: 'dstore', location: 'dstore' }
-    ],
-    has: {
-        highcontrast: 0
-    },
-    async: true
+	baseUrl: "externals/",
+	packages: [
+		{ name: 'dojo', location: 'dojo' },
+		{ name: 'dijit', location: 'dijit' }
+	],
+	has: {
+		highcontrast: 0
+	},
+	async: true
 };
 ```
 
