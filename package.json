@@ -11,16 +11,16 @@
     "test:all": "dojo build --mode unit && dojo build --mode functional && dojo test --all --config local"
   },
   "dependencies": {
-    "@dojo/framework": "^5.0.0",
-    "@dojo/interop": "^5.0.0",
+    "@dojo/framework": "^4.0.0",
+    "@dojo/interop": "^4.0.0",
     "dijit": "^1.14.2",
     "dojo": "^1.14.2",
     "tslib": "~1.8.1"
   },
   "devDependencies": {
-    "@dojo/cli": "^5.0.0",
-    "@dojo/cli-build-app": "^5.0.0",
-    "@dojo/cli-test-intern": "^5.0.0",
+    "@dojo/cli": "^4.0.0",
+    "@dojo/cli-build-app": "^4.0.0",
+    "@dojo/cli-test-intern": "^4.0.0",
     "@types/node": "~9.6.5",
     "dojo-typings": "^1.11.9",
     "typescript": "~2.6.1"

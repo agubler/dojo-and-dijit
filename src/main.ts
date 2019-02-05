@@ -1,7 +1,7 @@
 import renderer from '@dojo/framework/widget-core/vdom';
 import DijitWrapper from '@dojo/interop/dijit/DijitWrapper';
 import * as _Button from 'dijit/form/Button';
-import watch from '@dojo/framework/widget-core/decorators/watch';
+import { watch } from '@dojo/framework/widget-core/decorators/watch';
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import { v, w } from '@dojo/framework/widget-core/d';
 

@@ -1,6 +1,6 @@
-Dojo and Dijit Example
+# Dojo and Dijit Example
 
-dijit widgets can be included in modern Dojo applications using the `@dojo/interop/DijitWrapper`.
+dijit widgets can be included in modern Dojo applications using the `@dojo/interop/DijitWrapper`. To run the example run `npm run dev` and go to `http://localhost:9999`.
 
 ### Install Dependencies
 
