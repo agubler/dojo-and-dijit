@@ -1,0 +1,13 @@
+{
+	"build-app": {
+			"externals": {
+				"dependencies": [
+					{ "from": "loaderConfig.js", "inject": true },
+					{ "from": "node_modules/dojo", "to": "dojo", "name": "dojo", "inject": "dojo.js", "type": "umd" },
+					{ "from": "node_modules/dijit", "to": "dijit", "name": "dijit", "inject": "themes/claro/claro.css", "type": "umd" }
+				]
+		}
+	},
+	"test-intern": {},
+	"create-app": {}
+}
